@@ -3,16 +3,21 @@ import MainNavigationView from './view/main-navigation-view.js';
 import SortView from './view/sort-view.js';
 import BoardPresenter from './presenter/board-presenter.js';
 import FooterStatisticsView from './view/footer-statistics-view.js';
+import FilmsModel from './model/films-model.js';
 import {render} from './framework/render.js';
 
+const bodyContainer = document.querySelector('body');
 const headerContainer = document.querySelector('.header');
-const siteMainContainer = document.querySelector('.main');
-const boardPresenter = new BoardPresenter({boardContainer: siteMainContainer});
+const mainContainer = document.querySelector('.main');
 const footerStatisticsContainer = document.querySelector('.footer__statistics');
+const filmsModel = new FilmsModel();
+// const boardPresenter = new BoardPresenter({boardContainer: mainContainer, filmsModel});
+// const boardPresenter = new BoardPresenter({bodyContainer: bodyContainer, boardContainer: mainContainer, filmsModel});
+const boardPresenter = new BoardPresenter({bodyContainer, boardContainer: mainContainer, filmsModel});
 
 render(new ProfileView(), headerContainer);
-render(new MainNavigationView(), siteMainContainer);
-render(new SortView(), siteMainContainer);
+render(new MainNavigationView(), mainContainer);
+render(new SortView(), mainContainer);
 
 boardPresenter.init();
 

@@ -1,7 +1,7 @@
 import AbstractView from '../framework/view/abstract-view.js';
 
 function createShowMoreButtonTemplate() {
-  return `
+  return /* html */ `
     <button class="films-list__show-more">Show more</button>
   `;
 }

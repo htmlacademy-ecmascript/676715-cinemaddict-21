@@ -1,7 +1,7 @@
 import AbstractView from '../framework/view/abstract-view.js';
 
 function createFooterStatisticsTemplate() {
-  return `
+  return /* html */ `
     <p>130 291 movies inside</p>
   `;
 }

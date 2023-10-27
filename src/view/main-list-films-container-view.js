@@ -1,7 +1,7 @@
 import AbstractView from '../framework/view/abstract-view.js';
 
 function createFilmsMainListContainerTemplate() {
-  return `
+  return /* html */ `
     <div class="films-list__container"></div>
   `;
 }

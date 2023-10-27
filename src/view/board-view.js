@@ -1,7 +1,7 @@
 import AbstractView from '../framework/view/abstract-view.js';
 
 function createBoardTemplate() {
-  return `
+  return /* html */ `
     <section class="films"></section>
   `;
 }
