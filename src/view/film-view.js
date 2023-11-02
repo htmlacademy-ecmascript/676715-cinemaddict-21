@@ -1,5 +1,6 @@
 import AbstractView from '../framework/view/abstract-view.js';
-import {formatStringToYear, getFilmDurationInHours, getArrayElementsInRow} from '../utils.js';
+import {getArrayElementsInRow} from '../utils/common.js';
+import {formatStringToYear, getFilmDurationInHours} from '../utils/film.js';
 
 function createFilmTemplate({comments, filmInfo}) {
   const {title, totalRating, poster, release, duration, genres, description} = filmInfo;
@@ -29,12 +30,24 @@ function createFilmTemplate({comments, filmInfo}) {
 }
 
 export default class FilmView extends AbstractView {
-  constructor({film}) {
+  #film = null;
+  #handleCardClick = null;
+
+  constructor({film, onCardClick}) {
     super();
-    this.film = film;
+    this.#film = film;
+    // console.log(`this.#film: ${this.#film}`);
+    this.#handleCardClick = onCardClick;
+
+    this.element.querySelector('.film-card__link').addEventListener('click', this.#cardClickHandler);
   }
 
   get template() {
-    return createFilmTemplate(this.film);
+    return createFilmTemplate(this.#film);
   }
+
+  #cardClickHandler = (evt) => {
+    evt.preventDefault();
+    this.#handleCardClick();
+  };
 }

@@ -6,6 +6,7 @@ import FooterStatisticsView from './view/footer-statistics-view.js';
 import FilmsModel from './model/films-model.js';
 import {render} from './framework/render.js';
 
+// нужно #bodyContainer?
 const bodyContainer = document.querySelector('body');
 const headerContainer = document.querySelector('.header');
 const mainContainer = document.querySelector('.main');

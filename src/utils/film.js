@@ -25,14 +25,4 @@ function formatStringToDateTime(date) {
   return dayjs(date).format('YYYY/MM/DD HH:mm');
 }
 
-function getArrayElementsInRow(array) {
-  let x;
-  if (array.length > 1) {
-    x = array.join(', ');
-  } else {
-    x = array;
-  }
-  return x;
-}
-
-export {formatStringToYear, formatStringToDate, getFilmDurationInHours, formatStringToDateTime, getArrayElementsInRow};
+export {formatStringToYear, formatStringToDate, getFilmDurationInHours, formatStringToDateTime};
