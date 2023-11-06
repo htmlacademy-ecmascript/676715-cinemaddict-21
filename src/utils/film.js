@@ -9,7 +9,6 @@ function formatStringToYear(date) {
 
 function formatStringToDate(date) {
   return dayjs(date).format('DD MMMM YYYY');
-  // return dayjs(date).format('DD YYYY');
 }
 
 function getFilmDurationInHours(filmDuration) {
@@ -21,8 +20,27 @@ function getFilmDurationInHours(filmDuration) {
 }
 
 function formatStringToDateTime(date) {
-  // return dayjs(date).format('YYYY/MM/DD HH:mm');
   return dayjs(date).format('YYYY/MM/DD HH:mm');
 }
 
-export {formatStringToYear, formatStringToDate, getFilmDurationInHours, formatStringToDateTime};
+function isFilmInWachlist(inWatchlist) {
+  // console.log(`userDetails.inWatchlist: ${inWatchlist}`);
+  return inWatchlist === true;
+}
+
+function isFilmAlreadyWatched(alreadyWatched) {
+  // console.log(`userDetails.alreadyWatched: ${alreadyWatched}`);
+  return alreadyWatched === true;
+}
+
+function isFilmInFavorites(isFavorite) {
+  // console.log(`userDetails.isFavorite: ${isFavorite}`);
+  return isFavorite === true;
+}
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+export {formatStringToYear, formatStringToDate, getFilmDurationInHours, formatStringToDateTime, isFilmInWachlist, isFilmAlreadyWatched, isFilmInFavorites, capitalizeFirstLetter};
+// export {formatStringToYear, formatStringToDate, getFilmDurationInHours, formatStringToDateTime, isFilmInWachlist};
