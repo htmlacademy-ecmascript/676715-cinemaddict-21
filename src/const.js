@@ -5,4 +5,9 @@ const FilterType = {
   FAVORITES: 'favorites'
 };
 
-export {FilterType};
+const Mode = {
+  DEFAULT: 'default',
+  POPUP: 'popup'
+};
+
+export {FilterType, Mode};

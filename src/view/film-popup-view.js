@@ -32,11 +32,22 @@ function createCommentsListTemplate(comments) {
   return list;
 }
 
+function createControlsTemplate({inWatchlist, alreadyWatched, isFavorite}) {
+  const inWatchlistClassName = inWatchlist ? 'film-details__control-button--active' : '';
+  const alreadyWatchedClassName = alreadyWatched ? 'film-details__control-button--active' : '';
+  const favoriteClassName = isFavorite ? 'film-details__control-button--active' : '';
+  return /* html */ `
+    <button type="button" class="film-details__control-button film-details__control-button--watchlist ${inWatchlistClassName}" id="watchlist" name="watchlist">Add to watchlist</button>
+    <button type="button" class="film-details__control-button film-details__control-button--watched ${alreadyWatchedClassName}" id="watched" name="watched">Already watched</button>
+    <button type="button" class="film-details__control-button film-details__control-button--favorite ${favoriteClassName}" id="favorite" name="favorite">Add to favorites</button>
+  `;
+}
+
 function createGenresListTemplate(genres) {
   return /* html */ genres.map((genre) => `<span class="film-details__genre">${genre}</span>`).join('');
 }
 
-function createFilmPopupTemplate({comments, filmInfo}) {
+function createFilmPopupTemplate({comments, filmInfo, userDetails}) {
   // const {title, totalRating, poster, release, duration, genres, description} = filmInfo;
   const {title, altTitle, totalRating, poster, ageRating, director, writers, actors, release, duration, genres, description} = filmInfo;
   return /* html */ `
@@ -106,9 +117,7 @@ function createFilmPopupTemplate({comments, filmInfo}) {
           </div>
 
           <section class="film-details__controls">
-            <button type="button" class="film-details__control-button film-details__control-button--watchlist" id="watchlist" name="watchlist">Add to watchlist</button>
-            <button type="button" class="film-details__control-button film-details__control-button--active film-details__control-button--watched" id="watched" name="watched">Already watched</button>
-            <button type="button" class="film-details__control-button film-details__control-button--favorite" id="favorite" name="favorite">Add to favorites</button>
+            ${createControlsTemplate(userDetails)}
           </section>
         </div>
 
@@ -159,13 +168,24 @@ function createFilmPopupTemplate({comments, filmInfo}) {
 export default class FilmPopupView extends AbstractView {
   #film = null;
   #handleCloseClick = null;
+  #handleInWachlistClick = null;
+  #handleAlreadyWatchedClick = null;
+  #handleFavoriteClick = null;
 
-  constructor({film, onCloseClick}) {
+  constructor({film, onCloseClick, onInWachlistClick, onAlreadyWatchedClick, onFavoriteClick}) {
     super();
     this.#film = film;
     this.#handleCloseClick = onCloseClick;
+    this.#handleInWachlistClick = onInWachlistClick;
+    this.#handleAlreadyWatchedClick = onAlreadyWatchedClick;
+    this.#handleFavoriteClick = onFavoriteClick;
 
     this.element.querySelector('.film-details__close-btn').addEventListener('click', this.#closeClickHandler);
+
+    const cardControls = this.element.querySelector('.film-details__controls');
+    cardControls.querySelector('.film-details__control-button--watchlist').addEventListener('click', this.#inWachlistClickHandler);
+    cardControls.querySelector('.film-details__control-button--watched').addEventListener('click', this.#alreadyWatchedClickHandler);
+    cardControls.querySelector('.film-details__control-button--favorite').addEventListener('click', this.#favoriteClickHandler);
   }
 
   get template() {
@@ -174,6 +194,22 @@ export default class FilmPopupView extends AbstractView {
 
   #closeClickHandler = (evt) => {
     evt.preventDefault();
-    this.#handleCloseClick();
+    this.#handleCloseClick(this.#film);
+    // this.element.querySelector('.film-details__close-btn').removeEventListener('click', this.#closeClickHandler);
+  };
+
+  #inWachlistClickHandler = (evt) => {
+    evt.preventDefault();
+    this.#handleInWachlistClick();
+  };
+
+  #alreadyWatchedClickHandler = (evt) => {
+    evt.preventDefault();
+    this.#handleAlreadyWatchedClick();
+  };
+
+  #favoriteClickHandler = (evt) => {
+    evt.preventDefault();
+    this.#handleFavoriteClick();
   };
 }

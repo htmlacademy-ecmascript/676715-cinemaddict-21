@@ -8,4 +8,8 @@ function getArrayElementsInRow(array) {
   return x;
 }
 
-export {getArrayElementsInRow};
+function updateItem(items, update) {
+  return items.map((item) => item.id === update.id ? update : item);
+}
+
+export {getArrayElementsInRow, updateItem};

@@ -1,6 +1,5 @@
 import ProfileView from './view/profile-view.js';
 import FilterView from './view/filter-view.js';
-import SortView from './view/sort-view.js';
 import BoardPresenter from './presenter/board-presenter.js';
 import FooterStatisticsView from './view/footer-statistics-view.js';
 import FilmsModel from './model/films-model.js';
@@ -24,9 +23,7 @@ const filters = generateFilters(filmsModel.get());
 // console.log(`filters: ${filters}`);
 
 render(new ProfileView(), headerContainer);
-// render(new FilterView({filters}), mainContainer);
 render(new FilterView(filters), mainContainer);
-render(new SortView(), mainContainer);
 
 boardPresenter.init();
 
