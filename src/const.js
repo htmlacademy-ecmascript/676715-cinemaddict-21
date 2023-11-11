@@ -10,4 +10,10 @@ const Mode = {
   POPUP: 'popup'
 };
 
-export {FilterType, Mode};
+const SortType = {
+  DEFAULT: 'default',
+  DATE: 'date',
+  RATING: 'rating',
+};
+
+export {FilterType, Mode, SortType};

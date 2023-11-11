@@ -42,5 +42,13 @@ function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-export {formatStringToYear, formatStringToDate, getFilmDurationInHours, formatStringToDateTime, isFilmInWachlist, isFilmAlreadyWatched, isFilmInFavorites, capitalizeFirstLetter};
+function sortFilmDate(filmA, filmB) {
+  return new Date(filmB.filmInfo.release.date) - new Date(filmA.filmInfo.release.date);
+}
+
+function sortFilmRating(filmA, filmB) {
+  return filmB.filmInfo.totalRating - filmA.filmInfo.totalRating;
+}
+
+export {formatStringToYear, formatStringToDate, getFilmDurationInHours, formatStringToDateTime, isFilmInWachlist, isFilmAlreadyWatched, isFilmInFavorites, capitalizeFirstLetter, sortFilmDate, sortFilmRating};
 // export {formatStringToYear, formatStringToDate, getFilmDurationInHours, formatStringToDateTime, isFilmInWachlist};
